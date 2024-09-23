@@ -39,7 +39,8 @@ function Offer() {
 		if (
 			offers.some(
 				(offer) =>
-					offer.title.toLowerCase() === formData.title.toLowerCase().trim(),
+					offer.title.toLowerCase() ===
+					formData.title.toLowerCase().trim(),
 			)
 		) {
 			addAlert("Offer already exists", "warning");

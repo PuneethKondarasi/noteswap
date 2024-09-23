@@ -73,7 +73,8 @@ const Footer = ({ smoothScroll }) => {
 							<FaTwitter size={22} />
 						</NavLink>
 						<NavLink
-							to="https://www.instagram.com/vals.co_tech/" target={"_blank"}
+							to="https://www.instagram.com/vals.co_tech/"
+							target={"_blank"}
 							className="hover:text-zinc-200 active:scale-95"
 						>
 							<FaInstagram size={22} />

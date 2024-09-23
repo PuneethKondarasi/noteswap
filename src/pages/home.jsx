@@ -10,7 +10,7 @@ const Home = () => {
 	const [notes, setNotes] = useState([]);
 	const { user } = useUser();
 	const { getNotesByUserId } = useNotes();
-	
+
 	useEffect(() => {
 		const fetchNotes = async () => {
 			if (user && user.id) {

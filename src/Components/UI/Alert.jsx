@@ -34,6 +34,10 @@ function Alert({
 			"bg-red-400 dark:bg-red-600 text-white",
 			"bg-red-300 dark:bg-red-400",
 		],
+		red: [
+			"bg-red-500 dark:bg-red-700 text-white",
+			"bg-red-400 dark:bg-red-600",
+		],
 		sm: "h-10",
 		md: "h-16",
 		lg: "h-20",
