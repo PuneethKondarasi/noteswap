@@ -16,6 +16,8 @@ function Notes() {
 	const displaySectionRef = useRef(null);
 
 	useEffect(() => {
+		document.title = "Noteswap - Search";
+
 		const fetchNotes = async () => {
 			const fetchedNotes = await getAllNotesExceptOwner(user.id);
 			setNotes(fetchedNotes);
