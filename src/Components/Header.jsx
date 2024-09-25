@@ -13,8 +13,13 @@ const Header = () => {
 
 	const navigate = useNavigate();
 	const handleSearchSubmit = () => {
-		if (searchQuery.trim() !== "") {
+		if (!searchActive) {
+			setSearchActive(true);
+		} else if (searchActive && searchQuery.trim() !== "") {
 			navigate(`/notes?query=${searchQuery}`);
+			setSearchQuery("");
+			setSearchActive(false);
+		} else {
 			setSearchActive(false);
 		}
 	};
@@ -64,7 +69,7 @@ const Header = () => {
 					<div
 						className={` ${dropdown ? "flex" : "hidden"} grow px-10 lg:justify-end transition-transform duration-500 ease-in-out w-full lg:flex lg:w-auto lg:order-1`}
 					>
-						<ul className="flex flex-col justify-center items-center mt-4 font-medium pl-5 lg:pl-0 lg:flex-row lg:space-x-10 lg:mt-0 gap-4 lg:gap-0">
+						<ul className="flex flex-col lg:justify-end items-end lg:items-center mt-4 font-medium pl-5 lg:pl-0 lg:flex-row lg:space-x-10 lg:mt-0 gap-4 lg:gap-0 w-full">
 							<NavLink
 								to=""
 								className={({ isActive }) =>
@@ -92,13 +97,13 @@ const Header = () => {
 							>
 								Blogs
 							</NavLink>
-							<div className="flex gap-5 lg:gap-10 items-center">
+							<div className="flex gap-5 lg:gap-10 items-center flex-row-reverse lg:flex-row">
 								<button className="active:scale-75 duration-100 w-fit rounded-full">
 									<NavLink
 										to="profile"
 										onClick={() => setDropdown(false)}
 									>
-										<div className="rounded-full w-10 h-10 bg-slate-300 p-[2px]">
+										<div className="rounded-full w-8 h-8 bg-slate-300 p-[2px]">
 											{user && user.profile !== "" ? (
 												<img
 													src={user.profile}
@@ -113,28 +118,25 @@ const Header = () => {
 								</button>
 								<div className="relative flex items-center">
 									<button
-										className="active:scale-75 duration-100 w-fit rounded-full"
-										onClick={() =>
-											setSearchActive(!searchActive)
-										}
+										className={`active:scale-75 duration-100 w-fit absolute right-3 ${searchActive ? "text-slate-900" : "dark:text-slate-300"}`}
+										onClick={handleSearchSubmit}
 									>
 										<FaSearch size={25} />
 									</button>
-									{searchActive && (
-										<input
-											type="text"
-											value={searchQuery}
-											onChange={(e) =>
-												setSearchQuery(e.target.value)
+									<input
+										type="text"
+										className={`border-gray-500 rounded-full text-black px-3 py-2 duration-300 transition-all focus:outline-none ${searchActive ? "w-60 sm:w-96 lg:w-40 xl:w-72 visible bg-white border" : "w-0 bg-transparent invisible border-none"}`}
+										value={searchQuery}
+										onChange={(e) =>
+											setSearchQuery(e.target.value)
+										}
+										onKeyDown={(e) => {
+											if (e.key === "Enter") {
+												handleSearchSubmit();
 											}
-											placeholder="Search..."
-											className="ml-2 px-3 py-1 border border-gray-300 rounded-full text-black focus:outline-none"
-											onKeyPress={(e) =>
-												e.key === "Enter" &&
-												handleSearchSubmit()
-											}
-										/>
-									)}
+										}}
+										placeholder="Search..."
+									/>
 								</div>
 							</div>
 						</ul>
